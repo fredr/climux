@@ -4,8 +4,6 @@ import (
 	"strings"
 )
 
-type Handler func(*Request)
-
 type Route struct {
 	handler Handler
 	path    string

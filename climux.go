@@ -4,6 +4,9 @@ import (
 	"flag"
 )
 
+type Handler func(*Request)
+
+// Handle builds a request and tries to find a matching route in the router
 func Handle(r *Router) {
 	if !flag.Parsed() {
 		flag.Parse()
@@ -27,6 +30,7 @@ type Request struct {
 	vars map[string]string
 }
 
+// Vars returns all route variables from the request
 func (r Request) Vars() map[string]string {
 	return r.vars
 }
