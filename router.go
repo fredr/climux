@@ -1,14 +1,16 @@
 package climux
 
+// Router holds all routes
 type Router struct {
 	Routes []Route
 }
 
 // HandleFunc adds a Handler to a path
-func (r *Router) HandleFunc(path string, fn Handler) {
+func (r *Router) HandleFunc(path string, fn Handler, description string) {
 	route := Route{
-		handler: fn,
-		path:    path,
+		handler:     fn,
+		path:        path,
+		description: description,
 	}
 
 	r.Routes = append(r.Routes, route)

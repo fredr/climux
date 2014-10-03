@@ -1,12 +1,23 @@
 package climux
 
 import (
+	"fmt"
 	"strings"
 )
 
+// Route holds the information to match against Requests
 type Route struct {
-	handler Handler
-	path    string
+	handler     Handler
+	path        string
+	description string
+}
+
+func (r Route) String() string {
+	if r.description == "" {
+		return r.path
+	}
+
+	return fmt.Sprintf("  %s: %s", r.path, r.description)
 }
 
 func isParameter(s string) bool {
