@@ -2,6 +2,7 @@ package climux
 
 import (
 	"flag"
+	"strings"
 )
 
 type Handler func(*Request)
@@ -23,6 +24,9 @@ func Handle(r *Router) {
 			return
 		}
 	}
+	if r.NotFoundHandler != nil {
+		r.NotFoundHandler(req)
+	}
 }
 
 type Request struct {
@@ -33,4 +37,8 @@ type Request struct {
 // Vars returns all route variables from the request
 func (r Request) Vars() map[string]string {
 	return r.vars
+}
+
+func (r Request) String() string {
+	return strings.Join(r.args, " ")
 }

@@ -24,6 +24,7 @@ func main() {
 	r := climux.NewRouter()
 	r.HandleFunc("hello {name}", hello, "says hello to {name}")
 	r.HandleFunc("help", help(r), "shows help")
+  r.NotFoundHandler = help(r)
 
 	climux.Handle(r)
 }

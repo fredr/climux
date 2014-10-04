@@ -2,7 +2,8 @@ package climux
 
 // Router holds all routes
 type Router struct {
-	Routes []Route
+	Routes          []Route
+	NotFoundHandler Handler
 }
 
 // HandleFunc adds a Handler to a path
