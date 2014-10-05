@@ -11,7 +11,7 @@ A mux for the cli in go
     go test -v
 
 ### Use
-```
+```go
 package main
 
 import (
