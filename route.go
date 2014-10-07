@@ -14,7 +14,7 @@ type Route struct {
 
 func (r Route) String() string {
 	if r.description == "" {
-		return r.path
+		return fmt.Sprintf("  %s", r.path)
 	}
 
 	return fmt.Sprintf("  %s: %s", r.path, r.description)
