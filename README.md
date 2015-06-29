@@ -1,4 +1,4 @@
-climux
+climux [![GoDoc](https://godoc.org/github.com/fredr/climux?status.svg)](https://godoc.org/github.com/fredr/climux)
 ======
 
 A mux for the cli in go
