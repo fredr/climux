@@ -16,6 +16,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/fredr/climux"
 )
 
@@ -45,7 +46,7 @@ func hello(r *climux.Request) {
 
 func hi(r *climux.Request) {
 	if lastName, ok := r.Vars()["lastname"]; ok {
-	    fmt.Printf("Hi, %s %s!", r.Vars()["firstname"], lastName)
+		fmt.Printf("Hi, %s %s!", r.Vars()["firstname"], lastName)
 	} else {
 		fmt.Printf("Hi, %s!", r.Vars()["firstname"])
 	}
