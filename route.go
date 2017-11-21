@@ -20,8 +20,16 @@ func (r Route) String() string {
 	return fmt.Sprintf("  %s: %s", r.path, r.description)
 }
 
-func isParameter(s string) bool {
+func isRequiredParameter(s string) bool {
 	return s[:1] == "{" && s[len(s)-1:] == "}"
+}
+
+func isOptionalParameter(s string) bool {
+	return s[:1] == "[" && s[len(s)-1:] == "]"
+}
+
+func isParameter(s string) bool {
+	return isRequiredParameter(s) || isOptionalParameter(s)
 }
 
 func (r *Route) getVars(req *Request) map[string]string {
@@ -39,14 +47,20 @@ func (r *Route) getVars(req *Request) map[string]string {
 
 func (r *Route) match(req *Request) bool {
 	pathArgs := strings.Split(r.path, " ")
-	if len(pathArgs) != len(req.args) {
+	if len(req.args) > len(pathArgs) {
 		return false
 	}
 
-	for i, arg := range req.args {
-		if !isParameter(pathArgs[i]) {
-			if arg != pathArgs[i] {
+	for i := 0; i < len(pathArgs); i++ {
+		if i >= len(req.args) {
+			if !isOptionalParameter(pathArgs[i]) {
 				return false
+			}
+		} else {
+			if !isParameter(pathArgs[i]) {
+				if req.args[i] != pathArgs[i] {
+					return false
+				}
 			}
 		}
 	}

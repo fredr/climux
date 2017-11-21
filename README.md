@@ -16,6 +16,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/fredr/climux"
 )
 
@@ -23,6 +24,7 @@ func main() {
 
 	r := climux.NewRouter()
 	r.HandleFunc("hello {name}", hello, "says hello to {name}")
+	r.HandleFunc("hi {firstname} [lastname]", hi, "says hi to {firstname} with [lastname] if present")
 	r.HandleFunc("help", help(r), "shows help")
 	r.NotFoundHandler = help(r)
 
@@ -42,4 +44,11 @@ func hello(r *climux.Request) {
 	fmt.Printf("Hello, %s!", r.Vars()["name"])
 }
 
+func hi(r *climux.Request) {
+	if lastName, ok := r.Vars()["lastname"]; ok {
+		fmt.Printf("Hi, %s %s!", r.Vars()["firstname"], lastName)
+	} else {
+		fmt.Printf("Hi, %s!", r.Vars()["firstname"])
+	}
+}
 ```
