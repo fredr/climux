@@ -52,7 +52,7 @@ func (r *Route) match(req *Request) bool {
 	}
 
 	for i := 0; i < len(pathArgs); i++ {
- 		if i >= len(req.args) {
+		if i >= len(req.args) {
 			if !isOptionalParameter(pathArgs[i]) {
 				return false
 			}
